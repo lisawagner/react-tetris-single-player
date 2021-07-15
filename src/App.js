@@ -7,6 +7,7 @@ import Home from "./components/Home";
 const App = () => (
   <div className="App">
     <GlobalStyle />
+    <Home />
   </div>
 );
 
