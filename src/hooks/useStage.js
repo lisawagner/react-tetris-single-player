@@ -9,14 +9,14 @@ export const useStage = (player, resetPlayer) => {
     setClearRows(0);
 
     const sweepRows = (newStage) =>
-      newStage.reduce((ack, row) => {
+      newStage.reduce((accum, row) => {
         if (row.findIndex((cell) => cell[0] === 0) === -1) {
           setClearRows((prev) => prev + 1);
-          ack.unshift(new Array(newStage[0].length).fill([0, "clear"]));
-          return ack;
+          accum.unshift(new Array(newStage[0].length).fill([0, "clear"]));
+          return accum;
         }
-        ack.push(row);
-        return ack;
+        accum.push(row);
+        return accum;
       }, []);
 
     const updateStage = (prevStage) => {

@@ -3,6 +3,7 @@ import { checkCollision, initialStage } from "../../helpers";
 //Styles
 import { Wrapper, HUD } from "./Tetris.styles";
 // Custom Hooks
+import { useInterval } from "../../hooks/useInterval";
 import { usePlayer } from "../../hooks/usePlayer";
 import { useStage } from "../../hooks/useStage";
 // Components
@@ -26,6 +27,7 @@ const Tetris = () => {
   const startGame = () => {
     // reset game
     setStage(initialStage());
+    setDropTime(1000);
     resetPlayer();
     setGameOver(false);
   };
@@ -61,6 +63,10 @@ const Tetris = () => {
       }
     }
   };
+
+  useInterval(() => {
+    drop();
+  }, dropTime);
 
   return (
     <Wrapper role="button" tabIndex="0" onKeyDown={(e) => move(e)}>
