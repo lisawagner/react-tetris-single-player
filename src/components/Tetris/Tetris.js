@@ -1,4 +1,5 @@
 import React from "react";
+import { initialStage } from "../../helpers";
 //Styles
 import { Wrapper } from "./Tetris.styles";
 // Components
@@ -9,7 +10,7 @@ import StartButton from "../StartButton/StartButton";
 const Tetris = () => {
   return (
     <div>
-      <Stage />
+      <Stage stage={initialStage()} />
       <aside>
         <div>
           <Display text="Score" />
