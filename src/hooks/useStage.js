@@ -31,14 +31,14 @@ export const useStage = (player, resetPlayer) => {
           if (value !== 0) {
             newStage[y + player.pos.y][x + player.pos.x] = [
               value,
-              `${player.collided ? "merged" : "clear"}`,
+              `${player.collider ? "merged" : "clear"}`,
             ];
           }
         });
       });
 
       // Check for Collisions and Points
-      if (player.collided) {
+      if (player.collider) {
         resetPlayer();
         return sweepRows(newStage);
       }

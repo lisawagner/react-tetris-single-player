@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { initialStage } from "../../helpers";
+import { checkCollision, initialStage } from "../../helpers";
 //Styles
 import { Wrapper, HUD } from "./Tetris.styles";
 // Custom Hooks
@@ -14,23 +14,34 @@ const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
 
-  const [player, updatePlayerPos, resetPlayer] = usePlayer();
-  const [stage, setStage] = useStage(player);
-
-  console.log("re-render");
+  const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
+  const [stage, setStage, clearRows] = useStage(player, resetPlayer);
 
   const movePlayer = (dir) => {
-    updatePlayerPos({ x: dir, y: 0 });
+    if (!checkCollision(player, stage, { x: dir, y: 0 })) {
+      updatePlayerPos({ x: dir, y: 0 });
+    }
   };
 
   const startGame = () => {
     // reset game
     setStage(initialStage());
     resetPlayer();
+    setGameOver(false);
   };
 
   const drop = () => {
-    updatePlayerPos({ x: 0, y: 1, collider: false });
+    if (!checkCollision(player, stage, { x: 0, y: 1 })) {
+      updatePlayerPos({ x: 0, y: 1, collider: false });
+    } else {
+      // game over
+      if (player.pos.y < 1) {
+        console.log("GAME OVER!!!");
+        setGameOver(true);
+        setDropTime(null);
+      }
+      updatePlayerPos({ x: 0, y: 0, collider: true });
+    }
   };
 
   const dropPlayer = () => {
@@ -44,7 +55,9 @@ const Tetris = () => {
       } else if (keyCode === 39 || keyCode === 68) {
         movePlayer(1);
       } else if (keyCode === 40 || keyCode === 83) {
-        dropPlayer(-1);
+        dropPlayer();
+      } else if (keyCode === 38 || keyCode === 87) {
+        playerRotate(stage, 1);
       }
     }
   };
