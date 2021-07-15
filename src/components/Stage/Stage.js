@@ -1,4 +1,6 @@
 import React from "react";
+// Styles
+import { Wrapper } from "./Stage.styles";
 // Components
 import Cell from "../Cell/Cell";
 

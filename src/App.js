@@ -1,9 +1,12 @@
 import React from "react";
-import Tetris from "./components/Tetris/Tetris";
+// Styles
+import { GlobalStyle } from "./GlobalStyle";
+// Components
+import Home from "./components/Home";
 
 const App = () => (
   <div className="App">
-    <Tetris />
+    <GlobalStyle />
   </div>
 );
 

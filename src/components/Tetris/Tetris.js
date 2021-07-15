@@ -1,4 +1,6 @@
 import React from "react";
+//Styles
+import { Wrapper } from "./Tetris.styles";
 // Components
 import Stage from "../Stage/Stage";
 import Display from "../Display/Display";
