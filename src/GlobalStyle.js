@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
 
     * {
         box-sizing: border-box;
-        font-family: 'Abel', sans-serif;
+        font-family: 'Press Start 2P', sans-serif;
     }
 
     body {

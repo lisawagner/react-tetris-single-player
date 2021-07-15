@@ -1,9 +1,9 @@
 import React from "react";
-// Styles
-import { Wrapper } from "./Cell.styles";
+import { StyledCell } from "./Cell.styles";
+import { TETROMINOES } from "../../tetrominoes";
 
 const Cell = ({ type }) => {
-  return <div>Cell</div>;
+  return <StyledCell type={type} color={TETROMINOES[type].color} />;
 };
 
 export default Cell;
