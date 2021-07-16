@@ -16,7 +16,7 @@ const Tetris = () => {
   const [gameOver, setGameOver] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
-  const [stage, setStage, clearRows] = useStage(player, resetPlayer);
+  const [stage, setStage] = useStage(player, resetPlayer);
 
   const movePlayer = (dir) => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -46,7 +46,16 @@ const Tetris = () => {
     }
   };
 
+  const keyUp = ({ keyCode }) => {
+    if (!gameOver) {
+      if (keyCode === 40 || keyCode === 83) {
+        setDropTime(1000);
+      }
+    }
+  };
+
   const dropPlayer = () => {
+    setDropTime(null);
     drop();
   };
 
@@ -69,7 +78,12 @@ const Tetris = () => {
   }, dropTime);
 
   return (
-    <Wrapper role="button" tabIndex="0" onKeyDown={(e) => move(e)}>
+    <Wrapper
+      role="button"
+      tabIndex="0"
+      onKeyDown={(e) => move(e)}
+      onKeyUp={keyUp}
+    >
       <HUD>
         <Stage stage={stage} />
         <aside>
